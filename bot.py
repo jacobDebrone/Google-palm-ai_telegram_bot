@@ -154,22 +154,9 @@ def handle_messages(message):
 # Append the "NEXT REQUEST" message after keeping only the last 20 messages
 messages.append("NEXT REQUEST")
 
-def reconnect_and_handle_errors():
-    global bot
-    while True:
-        try:
-            bot.stop_polling()
-            bot = telebot.TeleBot(bot_token)
-            bot.infinity_polling(timeout=30, long_polling_timeout=5)
-        except Exception as e:
-            print(f"Reconnection failed: {e}")
-            traceback.print_exc()
-            time.sleep(10)  # Add a longer delay before attempting to reconnect again
-
 # Start the bot
 try:
     bot.infinity_polling(timeout=30, long_polling_timeout=5)
 except Exception as e:
     print(f"An error occurred: {e}")
     traceback.print_exc()
-    reconnect_and_handle_errors()
