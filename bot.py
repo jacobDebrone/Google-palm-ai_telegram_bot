@@ -1,3 +1,16 @@
+import subprocess
+
+def install_libraries():
+    try:
+        # Install required libraries using pip
+        subprocess.check_call(['pip', 'install', 'telebot', 'google.generativeai'])
+
+        # Print a message indicating successful installation
+        print("Libraries installed successfully.")
+    except subprocess.CalledProcessError as e:
+        # Print an error message if the installation fails
+        print(f"Error installing libraries: {e}")
+        
 import google.generativeai as palm
 import telebot
 import time
